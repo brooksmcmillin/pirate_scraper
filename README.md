@@ -1,2 +1,2 @@
-# pirate_scrapper
-Pirate  Bay Scrapper
+# pirate_scraper
+Pirate  Bay Scraper
