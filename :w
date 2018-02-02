@@ -1,0 +1,18 @@
+import urllib
+
+# 100: Audio
+# 200: Video
+# 300: Applications
+# 400: Games
+# 500: Porn
+# 600: Other
+var categories = [100, 200, 300, 400, 500, 600];
+
+# Order: 7-Seeders DESC, 9-Leechers DESC
+def create_url(category, page, order):
+    return 'https://thepiratebay.org/browse/' + str(category) + '/' + str(page) + '/' + str(order)
+
+url = create_url(categories[0], 0, 9)
+print urllib.request.urlopen(url).read()
+
+
