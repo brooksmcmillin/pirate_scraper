@@ -27,6 +27,71 @@ print(url)
 page = urlopen(req)
 content = page.read()
 
-print(content)
+# Get Magnet Link
+link_pos = content.find(b'class="download"')
+magnet_start = content.find(b'href="', link_pos) + 6
+magnet_end = content.find(b'"', magnet_start)
+magnet = content[magnet_start:magnet_end]
+
+# Get Title
+link_pos = content.find(b'<div id="title">')
+start = link_pos + 16
+end = content.find(b'</div>', start)
+title = content[start:end].strip()
+
+# Get Description
+start = content.find(b'<pre>') + 5
+end = content.find(b'</pre>', start)
+desc = content[start:end]
+
+# Get Seeders
+link_pos = content.find(b'<dt>Seeders:</dt>')
+start = content.find(b'<dd>', link_pos) + 4
+end = content.find(b'</dd>', start)
+seeders = content[start:end]
+
+# Get Leechers
+link_pos = content.find(b'<dt>Leechers:</dt>')
+start = content.find(b'<dd>', link_pos) + 4
+end = content.find(b'</dd>', start)
+leechers = content[start:end]
+
+# Get Uploaded Date
+link_pos = content.find(b'<dt>Uploaded:</dt>')
+start = content.find(b'<dd>', link_pos) + 4
+end = content.find(b'</dd>', start)
+uploaded_date = content[start:end]
+
+# Get User
+link_pos = content.find(b'<dt>By:</dt>')
+start = content.find(b'/user/', link_pos) + 6
+end = content.find(b'/', start)
+user = content[start:end]
+
+# Get Comment Count
+link_pos = content.find(b'<dt>Comments</dt>')
+start = content.find(b"<span id='NumComments'>", link_pos) + 23
+end = content.find(b'</span>', start)
+num_comments = content[start:end]
+
+# Get Info Hash
+link_pos = content.find(b'<dt>Info Hash:</dt>')
+start = content.find(b'<dd></dd>', link_pos) + 9
+end = content.find(b'</dl>', start)
+info_hash = content[start:end].strip()
+
+
+print(title)
+print(magnet)
+print(desc)
+print(seeders)
+print(leechers)
+print(uploaded_date)
+print(user)
+print(num_comments)
+print(info_hash)
+
+
+#print(content)
 
 
