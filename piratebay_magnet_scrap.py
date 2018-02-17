@@ -25,9 +25,7 @@ def save_torrent(torrent_id):
 
 
 
-save_torrent(0)
-save_torrent(19892614)
-
-
-
+for i in range(20125996):
+    print(i) 
+    save_torrent(i)
 
