@@ -1,13 +1,14 @@
 class Torrent:
     id = -1
+    exists = 0
     title = None
     magnet = None
     desc = None
-    seeders = 0
-    leachers = 0
+    seeders = None
+    leachers = None
     upload_date = None
     user = None
-    num_comments = 0
+    num_comments = None
     info_hash = None
 
     def __init__(self, id):
@@ -66,3 +67,5 @@ class Torrent:
         start = content.find(b'<dd></dd>', link_pos) + 9
         end = content.find(b'</dl>', start)
         self.info_hash = content[start:end].strip()
+
+        self.exists = 1
