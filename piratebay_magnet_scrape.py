@@ -10,7 +10,7 @@ conn = DatabaseConnection()
 categories = [100, 200, 300, 400, 500, 600]
 
 # For Testing Purposes
-categories = [100] 
+#categories = [100] 
 
 def create_url(category, page):
     return 'https://thepiratebay.org/browse/' + str(category) + '/' + str(page) + '/7'
@@ -67,6 +67,8 @@ def get_links_from_page(url):
     for link in links:
         save_torrent('https://thepiratebay.org' + str(link.decode("utf-8") ))
 
+    return len(links)
+
 class pirateThread(threading.Thread):
 
     def __init__(self, category):
@@ -74,8 +76,15 @@ class pirateThread(threading.Thread):
         self.category = category
 
     def run(self):
+        done = False
+        i = 0
         print("Starting cat " + str(self.category))
-        print(get_links_from_page(create_url(category, 0)))
+        while not done:
+            print("Cat " + str(category) + " Page " + str(i))
+            num_links = get_links_from_page(create_url(category, i))
+            if num_links == 0:
+                done = True
+            i = i + 1
         print('Exiting cat ' + str(self.category))        
 
 
