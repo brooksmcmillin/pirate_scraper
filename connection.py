@@ -15,8 +15,8 @@ class DatabaseConnection:
 
     def insert_torrent(self, torrent):
         cur = self.conn.cursor()
-        sql = 'INSERT INTO torrent VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+        sql = 'INSERT INTO torrent VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE exist = %s, seeders = %s, leechers = %s, comment_count = %s'
 
-        cur.execute(sql, (torrent.id, torrent.exists, torrent.title, torrent.desc, torrent.magnet, torrent.seeders, torrent.leachers, torrent.upload_date, torrent.num_comments, torrent.user, torrent.info_hash))
+        cur.execute(sql, (torrent.id, torrent.exists, torrent.title, torrent.desc, torrent.magnet, torrent.seeders, torrent.leachers, torrent.upload_date, torrent.num_comments, torrent.user, torrent.info_hash, torrent.exists, torrent.seeders, torrent.leachers, torrent.num_comments))
         self.conn.commit()
         
