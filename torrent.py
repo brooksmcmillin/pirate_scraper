@@ -1,5 +1,6 @@
 class Torrent:
     id = -1
+    category = 0
     exists = 0
     title = None
     magnet = None
@@ -11,8 +12,9 @@ class Torrent:
     num_comments = None
     info_hash = None
 
-    def __init__(self, id):
+    def __init__(self, id, category):
         self.id = id
+        self.category = category
 
     def get_from_html(self, content):
         # Get Magnet Link
